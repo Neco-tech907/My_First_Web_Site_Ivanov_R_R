@@ -1,0 +1,80 @@
+/* Основные стили */
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #FFA500;
+    color: white;
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* Навигационная панель */
+.nav_bar {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 20px 0;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Логотип*/
+.nav_logo {
+    background-image: url('../images/img2.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 80px;
+}
+
+.nav_text {
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: right;
+    padding-right: 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Основное фото*/
+.row_photo {
+    background-image: url('../images/img1.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 300px;
+    margin: 20px auto;
+    max-width: 80%;
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Основной контент */
+.row {
+    margin-bottom: 25px;
+}
+
+h2 {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.8;
+    padding: 25px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+/* Подпись */
+.tittle_photo {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 20px 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
+}
