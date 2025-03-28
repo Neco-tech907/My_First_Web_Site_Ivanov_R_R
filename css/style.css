@@ -78,3 +78,51 @@ h2 {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
     letter-spacing: 1px;
 }
+
+/* Стили для контейнера */
+#button-container {
+    text-align: center;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(5px);
+}
+
+/* Стили для кнопки */
+#toggle-button {
+    padding: 12px 24px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 200px;
+    margin: 0 auto;
+}
+
+#toggle-button:hover {
+    background-color: #45a049;
+}
+
+/* Стили для изображения */
+#image-container img {
+    max-width: 300px;
+    margin: 20px auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    #toggle-button {
+        width: 80%;
+    }
+    
+    #image-container img {
+        max-width: 80%;
+    }
+}
