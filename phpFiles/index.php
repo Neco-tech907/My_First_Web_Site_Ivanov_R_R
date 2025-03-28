@@ -15,10 +15,11 @@
     <div class="auth-container">
         <h1 class="auth-title">Авторизируйтесь!</h1>
         <div class="auth-links">
-            <a href="/registration.php" class="auth-link">Зарегистрируйтесь</a>
+            <a href="../phpFiles/registration.php" class="auth-link">Зарегистрируйтесь</a>
             <span class="auth-link-divider">|</span>
-            <a href="/login.php" class="auth-link">Войти</a>
+            <a href="../phpFiles/login.php" class="auth-link">Войти</a>
         </div>
     </div>
+</body>
 
 </html>
