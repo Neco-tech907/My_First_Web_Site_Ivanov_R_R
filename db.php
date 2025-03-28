@@ -2,7 +2,7 @@
 $servername = "127.0.0.1";
 $username = "your_user_name";
 $password = "password";
-$dbName = "db_name";
+$dbName = "first";
 
 $link = mysqli_connect($servername, $username, $password);
 if (!$link) {
