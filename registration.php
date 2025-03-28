@@ -42,7 +42,7 @@
 <?php
 require_once('db.php');
 
-$link = mysqli_connect('127.0.0.1', 'root', 'password', 'name_db');
+$link = mysqli_connect('127.0.0.1', 'root', 'password', 'first');
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
