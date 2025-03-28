@@ -20,7 +20,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form method="POST" action="registration.php">
+                <form method="POST" action="phpFiles/registration.php">
                     <div class="row form_reg">
                         <input class="form" type="email" name="email" placeholder="Email">
                     </div>
