@@ -41,23 +41,27 @@
 
 <?php
 require_once('db.php');
-$link = mysqli_connect('127.0.0.1', 'root', 'kali', 'name_db');
 
-if (isset($_POST['submit'])) {
-    $email = $_POST['email'];
-    $username = $_POST['login']; // Исправлено с username на login (как в форме)
-    $password = $_POST['password'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'first');
+
+    $email = mysqli_real_escape_string($link, $_POST['email']);
+    $username = mysqli_real_escape_string($link, $_POST['login']);
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+    if (empty($email) || empty($username) || empty($_POST['password'])) {
+        die('Пожалуйста, заполните все поля!');
+    }
+
+    $sql = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password')";
+
+    if (mysqli_query($link, $sql)) {
+        header('Location: login.php'); // Перенаправление после успешной регистрации
+        exit;
+    } else {
+        $error = "Ошибка регистрации: " . mysqli_error($link);
+    }
+
+    mysqli_close($link);
 }
-
-if (empty($email) || empty($username) || empty($password)) {
-    die('Пожалуйста, введите все значения!');
-}
-
-$sql = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password')";
-
-if (!mysqli_query($link, $sql)) {
-    echo "Не удалось добавить пользователя: " . mysqli_error($link);
-}
-
-mysqli_close($link);
 ?>
