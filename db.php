@@ -1,8 +1,8 @@
 <?php
 $servername = "127.0.0.1";
-$username = "your_user_name";
-$password = "password";
-$dbName = "first";
+$username = "root";
+$password = "kali";
+$dbName = "db_kali";
 
 $link = mysqli_connect($servername, $username, $password);
 if (!$link) {

@@ -42,7 +42,7 @@
 <?php
 require_once('db.php');
 
-$link = mysqli_connect('127.0.0.1', 'root', 'password', 'first');
+$link = mysqli_connect('127.0.0.1', 'root', 'kali', 'db_kali');
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
