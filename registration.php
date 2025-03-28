@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div class="container">
+    <div class="container auth-container">
         <div class="row">
             <div class="col-12">
                 <h1>Регистрация</h1>
