@@ -4,25 +4,21 @@ $username = "your_user_name";
 $password = "password";
 $dbName = "db_name";
 
-// Создание подключения
 $link = mysqli_connect($servername, $username, $password);
 if (!$link) {
     die("Ошибка подключения: " . mysqli_connect_error());
 }
 
-// Создание БД
 $sql = "CREATE DATABASE IF NOT EXISTS $dbName";
 if (!mysqli_query($link, $sql)) {
     die("Ошибка создания БД: " . mysqli_error($link));
 }
 
-// Подключение к конкретной БД
 $link = mysqli_connect($servername, $username, $password, $dbName);
 if (!$link) {
     die("Ошибка подключения к БД: " . mysqli_connect_error());
 }
 
-// Создание таблиц
 $sql = "CREATE TABLE IF NOT EXISTS users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL,
