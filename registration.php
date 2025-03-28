@@ -20,7 +20,7 @@
         </div>
         <div class="row">
             <div class="col-12">
-                <form method="POST" action="phpFiles/registration.php">
+                <form method="POST" action="registration.php">
                     <div class="row form_reg">
                         <input class="form" type="email" name="email" placeholder="Email">
                     </div>
@@ -42,26 +42,20 @@
 <?php
 require_once('db.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'first');
+$link = mysqli_connect('127.0.0.1', 'root', 'password', 'name_db');
 
-    $email = mysqli_real_escape_string($link, $_POST['email']);
-    $username = mysqli_real_escape_string($link, $_POST['login']);
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+if (isset($_POST['submit'])) {
+    $email = $_POST['email'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
 
-    if (empty($email) || empty($username) || empty($_POST['password'])) {
-        die('Пожалуйста, заполните все поля!');
-    }
+
+    if (!$email || !$username || !$password) die('Пожалуйста введите все значения!');
 
     $sql = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password')";
 
-    if (mysqli_query($link, $sql)) {
-        header('Location: login.php'); // Перенаправление после успешной регистрации
-        exit;
-    } else {
-        $error = "Ошибка регистрации: " . mysqli_error($link);
+    if (!mysqli_query($link, $sql)) {
+        echo "Не удалось добавить пользователя";
     }
-
-    mysqli_close($link);
 }
 ?>

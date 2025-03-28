@@ -1,8 +1,8 @@
 <?php
 $servername = "127.0.0.1";
-$username = "root";
-$password = "kali";
-$dbName = "first";
+$username = "your_user_name";
+$password = "password";
+$dbName = "db_name";
 
 // Создание подключения
 $link = mysqli_connect($servername, $username, $password);
@@ -27,21 +27,22 @@ $sql = "CREATE TABLE IF NOT EXISTS users (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
-    password VARCHAR(255) NOT NULL  // Изменил pass на password для согласованности
+    pass VARCHAR(50) NOT NULL
 )";
 
 if (!mysqli_query($link, $sql)) {
-    die("Ошибка создания таблицы Users: " . mysqli_error($link));
+    echo "Ошибка создания таблицы Users: ";
 }
 
 $sql = "CREATE TABLE IF NOT EXISTS posts (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(100) NOT NULL,
-    main_text TEXT NOT NULL
+    main_text VARCHAR(400) NOT NULL
 )";
 
 if (!mysqli_query($link, $sql)) {
-    die("Ошибка создания таблицы posts: " . mysqli_error($link));
+    echo "Ошибка создания таблицы posts: ";
 }
 
 mysqli_close($link);
+?>
