@@ -41,21 +41,25 @@
 
 <?php
 require_once('db.php');
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'db_kali');
 
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
-    $username = $_POST['username'];
+    $username = $_POST['login'];
     $password = $_POST['password'];
 
 
-    if (!$email || !$username || !$password) die('Пожалуйста введите все значения!');
-
+    if (empty($email) || empty($username) || empty($raw_password)) {
+        die('Пожалуйста введите все значения!');
+    }
     $sql = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password')";
 
     if (!mysqli_query($link, $sql)) {
         echo "Не удалось добавить пользователя";
     }
+    
 }
 ?>
