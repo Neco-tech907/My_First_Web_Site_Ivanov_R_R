@@ -85,3 +85,20 @@ body {
     margin: 10px 0;
   }
 }
+
+.btn_red {
+  padding: 12px 24px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 200px;
+  margin: 0 auto;
+}
+
+.btn_red:hover {
+  background-color: #45a049;
+}

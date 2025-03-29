@@ -15,7 +15,7 @@
     <div class="container auth-container">
         <div class="row">
             <div class="col-12">
-                <h1>Регистрация</h1>
+                <h1>Вход</h1>
             </div>
         </div>
         <div class="row">
@@ -49,7 +49,7 @@ if (isset($_POST['submit'])) {
     if (!$username || !$password) {
         die('Пожалуйста введите все значения!');
     }
-    $sql = "SELECT * FROM users WHERE username='$username' AND pass='$pass'";
+    $sql = "SELECT * FROM users WHERE username='$username' AND pass='$password'";
 
     $result = mysqli_query($link, $sql);
 
