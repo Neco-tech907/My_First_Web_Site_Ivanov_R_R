@@ -163,7 +163,7 @@ h2 {
 
 /* Новые стили для кнопки (перезаписывающие все остальные) */
 button.btn_red {
-  all: unset; /* Сбрасываем все стандартные стили */
+  all: unset; 
   cursor: pointer;
   color: #ff4444 !important;
   font-size: 16px;
@@ -181,7 +181,6 @@ button.btn_red:hover {
   transform: translateY(-2px);
 }
 
-/* Если нужно сделать кнопку более заметной */
 button.btn_red.visible {
   text-decoration: none;
   border: 2px solid #ff4444;
