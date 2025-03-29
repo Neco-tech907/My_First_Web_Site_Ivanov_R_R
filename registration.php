@@ -52,10 +52,10 @@ if (isset($_POST['submit'])) {
     $password = $_POST['password'];
 
 
-    if (empty($email) || empty($username) || empty($raw_password)) {
+    if (!$email || !$username || !$password) {
         die('Пожалуйста введите все значения!');
     }
-    $sql = "INSERT INTO users (email, username, password) VALUES ('$email', '$username', '$password')";
+    $sql = "INSERT INTO users (email, username, pass) VALUES ('$email', '$username', '$password')";
 
     if (!mysqli_query($link, $sql)) {
         echo "Не удалось добавить пользователя";
