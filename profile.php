@@ -58,22 +58,22 @@
   </div>
 
 
-  <div class="container form-container ">
-    <div class="row">
-      <div class="col-12">
-        <h1
-          class="helo">Привет, <?php echo $_COOKIE['User']; ?>
-        </h1>
-      </div>
-      <div class="col-12">
-        <form method="POST" action="profile.php">
-          <input class="form" type="text" name="title" placeholder="Заголовок вашего поста">
-          <textarea name="test" cols="30" rows="10" placeholder="Введите текст вашего поста"></textarea>
-          <button type="submit" class="btn_red" name="submit">Сохранить пост</button>
-        </form>
-      </div>
+  <div class="container form-container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h1 class="helo text-center mb-4">Привет, <?php echo $_COOKIE['User']; ?></h1>
+            <form method="POST" action="profile.php" class="styled-form">
+                <div class="mb-3">
+                    <input class="form-control form-input" type="text" name="title" placeholder="Заголовок вашего поста">
+                </div>
+                <div class="mb-3">
+                    <textarea class="form-control form-textarea" name="text" rows="6" placeholder="Введите текст вашего поста"></textarea>
+                </div>
+                <button type="submit" class="btn btn-red w-100" name="submit">Сохранить пост</button>
+            </form>
+        </div>
     </div>
-  </div>
+</div>
   <script src="js/button.js"></script>
 </body>
 
