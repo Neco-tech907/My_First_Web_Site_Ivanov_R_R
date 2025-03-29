@@ -27,7 +27,7 @@
                     <div class="row form_reg">
                         <input class="form" type="password" name="password" placeholder="Password">
                     </div>
-                    <button type="submit" class="btn_red btn__reg" name="submit">продолжить</button>
+                    <button type="submit" class="btn_red btn__reg" name="submit">войти</button>
                 </form>
             </div>
         </div>
@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
         setcookie("User", $username, time()+7200);
         header('Location: profile.php');
       } else {
-        echo "не правильное имя или пароль";
+        echo "Не правильное имя или пароль";
       }
 }
 ?>

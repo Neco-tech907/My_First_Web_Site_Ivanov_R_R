@@ -51,15 +51,21 @@ if (isset($_POST['submit'])) {
     $username = $_POST['login'];
     $password = $_POST['password'];
 
+    if (isset($_COOKIE['User'])) {
+        header("Location: profile.php");
+    }
 
     if (!$email || !$username || !$password) {
         die('Пожалуйста введите все значения!');
     }
     $sql = "INSERT INTO users (email, username, pass) VALUES ('$email', '$username', '$password')";
 
-    if (!mysqli_query($link, $sql)) {
-        echo "Не удалось добавить пользователя";
+    if (mysqli_query($link, $sql)) {
+        // Перенаправляем на страницу входа после успешной регистрации
+        header('Location: login.php');
+        exit();
+    } else {
+        echo "Не удалось добавить пользователя: " . mysqli_error($link);
     }
-    
 }
 ?>
