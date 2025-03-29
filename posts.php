@@ -1,6 +1,6 @@
 <?php
 $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'db_kali');
-$id = $GET['id'];
+$id = $_GET['id'] ?? 0;
 $sql = "SELECT * FROM posts WHERE id=$id";
 $res = mysqli_query($link, $sql);
 $rows = mysqli_fetch_array($res);
