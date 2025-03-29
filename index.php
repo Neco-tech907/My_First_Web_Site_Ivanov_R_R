@@ -14,13 +14,15 @@
 <body>
     <div class="auth-container">
         <h1 class="auth-title">Авторизируйтесь!</h1>
-        <?php if (!isset($_COOKIE['User'])): ?>
+        <?php
+            if (!isset($_COOKIE['User'])) {
+        ?>
             <div class="auth-links">
                 <a href="registration.php" class="auth-link">Зарегистрируйтесь</a>
                 <span class="auth-link-divider">|</span>
                 <a href="login.php" class="auth-link">Войти</a>
             </div>
-        <?php else:
+        <?php } else{
             $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'db_kali');
             $sql = "SELECT * FROM posts";
             $res = mysqli_query($link, $sql);
@@ -31,6 +33,7 @@
             } else {
                 echo "Записей пока нет";
             }
+        }
         ?>
     </div>
 </body>
