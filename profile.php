@@ -85,28 +85,42 @@ require_once('db.php');
 
 $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'db_kali');
 
+// Обработка формы
 if (isset($_POST['submit'])) {
+    $title = $_POST['title'];
+    $main_text = $_POST['text'];
 
-  $title = $_POST['title'];
-  $main_text = $_POST['text'];
+    if (!$title || !$main_text) die("Заполните все поля");
 
-  if (!$title || !$main_text) die("Заполните все поля");
+    $sql = "INSERT INTO posts (title, main_text) VALUES ('$title', '$main_text')";
 
-  $sql = "INSERT INTO posts (title, main_text) VALUES ('$title', '$main_text')";
-
-  if (!mysqli_query($link, $sql)) die("Не удалось добавить пост");
+    if (!mysqli_query($link, $sql)) die("Не удалось добавить пост");
 }
 
-if (!empty($_FILES["file"])) {
-  if (((@$_FILES["file"]["type"] == "image/gif") || (@$_FILES["file"]["type"] == "image/jpeg")
-      || (@$_FILES["file"]["type"] == "image/jpg") || (@$_FILES["file"]["type"] == "image/pjpeg")
-      || (@$_FILES["file"]["type"] == "image/x-png") || (@$_FILES["file"]["type"] == "image/png"))
-    && (@$_FILES["file"]["size"] < 102400)
-  ) {
-    move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);
-    echo "Load in:  " . "upload/" . $_FILES["file"]["name"];
-  } else {
-    echo "upload failed!";
-  }
+if (!empty($_FILES['file']['name'])) {
+    $upload_dir = 'upload/';
+    $file_name = basename($_FILES['file']['name']);
+    $target_path = $upload_dir . $file_name;
+    
+    if (!file_exists($upload_dir)) {
+        mkdir($upload_dir, 0777, true);
+    }
+
+    if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) {
+        die("Ошибка загрузки: " . $_FILES['file']['error']);
+    }
+
+    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+    $file_type = mime_content_type($_FILES['file']['tmp_name']);
+    
+    if (!in_array($file_type, $allowed_types)) {
+        die("Допустимы только изображения (JPEG, PNG, GIF)");
+    }
+
+    if (move_uploaded_file($_FILES['file']['tmp_name'], $target_path)) {
+        echo "Файл успешно загружен: <a href='$target_path'>$file_name</a>";
+    } else {
+        echo "Ошибка при сохранении файла. Проверьте права на папку upload/";
+    }
 }
 ?>
