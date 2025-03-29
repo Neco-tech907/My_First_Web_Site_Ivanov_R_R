@@ -46,14 +46,15 @@ ini_set('display_errors', 1);
 
 $link = mysqli_connect('127.0.0.1', 'root', 'kali', 'db_kali');
 
+if (isset($_COOKIE['User'])) {
+    header("Location: profile.php");
+}
+
 if (isset($_POST['submit'])) {
     $email = $_POST['email'];
     $username = $_POST['login'];
     $password = $_POST['password'];
 
-    if (isset($_COOKIE['User'])) {
-        header("Location: profile.php");
-    }
 
     if (!$email || !$username || !$password) {
         die('Пожалуйста введите все значения!');
