@@ -97,30 +97,19 @@ if (isset($_POST['submit'])) {
     if (!mysqli_query($link, $sql)) die("Не удалось добавить пост");
 }
 
-if (!empty($_FILES['file']['name'])) {
-    $upload_dir = 'upload/';
-    $file_name = basename($_FILES['file']['name']);
-    $target_path = $upload_dir . $file_name;
-    
-    if (!file_exists($upload_dir)) {
-        mkdir($upload_dir, 0777, true);
+if(!empty($_FILES["file"]))
+    {
+        if (((@$_FILES["file"]["type"] == "image/gif") || (@$_FILES["file"]["type"] == "image/jpeg")
+        || (@$_FILES["file"]["type"] == "image/jpg") || (@$_FILES["file"]["type"] == "image/pjpeg")
+        || (@$_FILES["file"]["type"] == "image/x-png") || (@$_FILES["file"]["type"] == "image/png"))
+        && (@$_FILES["file"]["size"] < 102400))
+        {
+            move_uploaded_file($_FILES["file"]["tmp_name"], "upload/" . $_FILES["file"]["name"]);
+            echo "Load in:  " . "upload/" . $_FILES["file"]["name"];
+        }
+        else
+        {
+            echo "upload failed!";
+        }
     }
-
-    if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) {
-        die("Ошибка загрузки: " . $_FILES['file']['error']);
-    }
-
-    $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
-    $file_type = mime_content_type($_FILES['file']['tmp_name']);
-    
-    if (!in_array($file_type, $allowed_types)) {
-        die("Допустимы только изображения (JPEG, PNG, GIF)");
-    }
-
-    if (move_uploaded_file($_FILES['file']['tmp_name'], $target_path)) {
-        echo "Файл успешно загружен: <a href='$target_path'>$file_name</a>";
-    } else {
-        echo "Ошибка при сохранении файла. Проверьте права на папку upload/";
-    }
-}
 ?>
