@@ -45,13 +45,13 @@ if (isset($_POST['submit'])) {
     $username = $_POST['login'];
     $password = $_POST['password'];
 
-    if ($username || !$password) {
+    if ($username && !$password) {
         die('Неверный пароль!');
     }
-    if (!$username || !$password) {
+    if (!$username && !$password) {
         die('Пожалуйста введите все значения!');
     }
-    if (!$username || $password) {
+    if (!$username && $password) {
         die('Неверные учетные данные');
     }
 
