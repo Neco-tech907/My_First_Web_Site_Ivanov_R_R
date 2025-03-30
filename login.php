@@ -28,6 +28,15 @@
                         <input class="form" type="password" name="password" placeholder="Password">
                     </div>
                     <button type="submit" class="btn_red btn__reg" name="submit">войти</button>
+                    <?php
+                    if (isset($_POST['submit'])) {
+                        if (isset($user_result) && mysqli_num_rows($user_result) == 0) {
+                            echo '<div class="error-message">Неверный логин</div>';
+                        } elseif (isset($result) && mysqli_num_rows($result) == 0) {
+                            echo '<div class="error-message">Неверный пароль</div>';
+                        }
+                    }
+                    ?>
                 </form>
             </div>
         </div>
@@ -45,19 +54,28 @@ if (isset($_POST['submit'])) {
     $username = $_POST['login'];
     $password = $_POST['password'];
 
-
     if (!$username || !$password) {
         die('Пожалуйста введите все значения!');
     }
-    $sql = "SELECT * FROM users WHERE username='$username' AND pass='$password'";
 
-    $result = mysqli_query($link, $sql);
+    // Сначала проверяем существует ли пользователь
+    $user_check = "SELECT * FROM users WHERE username='$username'";
+    $user_result = mysqli_query($link, $user_check);
 
-    if (mysqli_num_rows($result) == 1) {
-        setcookie("User", $username, time()+7200);
-        header('Location: profile.php');
-      } else {
-        echo "Не правильное имя или пароль";
-      }
+    if (mysqli_num_rows($user_result) == 0) {
+        echo "Неверный логин";
+    } else {
+        // Если пользователь существует, проверяем пароль
+        $sql = "SELECT * FROM users WHERE username='$username' AND pass='$password'";
+        $result = mysqli_query($link, $sql);
+
+        if (mysqli_num_rows($result) == 1) {
+            setcookie("User", $username, time() + 7200);
+            header('Location: profile.php');
+            exit();
+        } else {
+            echo "Неверный пароль";
+        }
+    }
 }
 ?>
