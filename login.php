@@ -45,16 +45,16 @@ if (isset($_POST['submit'])) {
     $username = $_POST['login'];
     $password = $_POST['password'];
 
-
+    if ($username || !$password) {
+        die('Неверный пароль!');
+    }
     if (!$username || !$password) {
         die('Пожалуйста введите все значения!');
     }
     if (!$username || $password) {
         die('Неверные учетные данные');
     }
-    if ($username || !$password) {
-        die('Неверный пароль!');
-    }
+
     $sql = "SELECT * FROM users WHERE username='$username' AND pass='$password'";
 
     $result = mysqli_query($link, $sql);
