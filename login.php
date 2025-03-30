@@ -28,15 +28,9 @@
                         <input class="form" type="password" name="password" placeholder="Password">
                     </div>
                     <button type="submit" class="btn_red btn__reg" name="submit">войти</button>
-                    <?php
-                    if (isset($_POST['submit'])) {
-                        if (isset($user_result) && mysqli_num_rows($user_result) == 0) {
-                            echo '<div class="error-message">Неверный логин</div>';
-                        } elseif (isset($result) && mysqli_num_rows($result) == 0) {
-                            echo '<div class="error-message">Неверный пароль</div>';
-                        }
-                    }
-                    ?>
+                    <?php if (isset($error)): ?>
+                        <div class="error-message"><?php echo $error; ?></div>
+                    <?php endif; ?>
                 </form>
             </div>
         </div>
@@ -54,28 +48,34 @@ if (isset($_POST['submit'])) {
     $username = $_POST['login'];
     $password = $_POST['password'];
 
-    if (!$username || !$password) {
+    if (empty($username) || empty($password)) {
         die('Пожалуйста введите все значения!');
     }
 
-    // Сначала проверяем существует ли пользователь
-    $user_check = "SELECT * FROM users WHERE username='$username'";
-    $user_result = mysqli_query($link, $user_check);
+    $user_check = mysqli_prepare($link, "SELECT username FROM users WHERE username = ?");
+    mysqli_stmt_bind_param($user_check, "s", $username);
+    mysqli_stmt_execute($user_check);
+    mysqli_stmt_store_result($user_check);
+    $user_exists = (mysqli_stmt_num_rows($user_check) > 0);
+    mysqli_stmt_close($user_check);
 
-    if (mysqli_num_rows($user_result) == 0) {
-        echo "Неверный логин";
-    } else {
-        // Если пользователь существует, проверяем пароль
-        $sql = "SELECT * FROM users WHERE username='$username' AND pass='$password'";
-        $result = mysqli_query($link, $sql);
+    if ($user_exists) {
+        $auth_check = mysqli_prepare($link, "SELECT username FROM users WHERE username = ? AND pass = ?");
+        mysqli_stmt_bind_param($auth_check, "ss", $username, $password);
+        mysqli_stmt_execute($auth_check);
+        mysqli_stmt_store_result($auth_check);
+        $auth_valid = (mysqli_stmt_num_rows($auth_check) > 0);
+        mysqli_stmt_close($auth_check);
 
-        if (mysqli_num_rows($result) == 1) {
-            setcookie("User", $username, time() + 7200);
+        if ($auth_valid) {
+            setcookie("User", $username, time()+7200);
             header('Location: profile.php');
             exit();
         } else {
-            echo "Неверный пароль";
+            $error = "Неверный пароль";
         }
+    } else {
+        $error = "Неверные учетные данные"; 
     }
 }
 ?>
